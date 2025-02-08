@@ -38,6 +38,7 @@ def checklooser():
             if buttons[row][col]["text"] == "":
                 return None, []
             
+    return "tie", []
 
 
 
@@ -47,7 +48,9 @@ def switchplayer(row, column):
     if buttons[row][column]["text"] == "" and result is None:
         buttons[row][column]["text"] = player
         result, loosing_coords = checklooser()  # Überprüfen, ob nach dem Zug jemand verloren hat
-        if result:
+        if result == "tie":
+            label.config(text=f"Untentschieden!")
+        elif result:
             label.config(text=f"{result} Hat verloren!")
             highlight_losing_fields(loosing_coords)
         else:
